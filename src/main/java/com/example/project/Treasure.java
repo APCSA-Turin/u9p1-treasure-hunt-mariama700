@@ -1,8 +1,8 @@
 package com.example.project;
 
-//only needs a constructor
-public class Treasure { //child of Sprite
+// Basic treasure item
+public class Treasure extends Sprite {
     public Treasure(int x, int y) {
+        super(x, y);
     }
-
 }
