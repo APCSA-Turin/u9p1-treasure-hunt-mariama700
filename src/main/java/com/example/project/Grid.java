@@ -5,7 +5,7 @@ public class Grid {
     private Sprite[][] board;
     private int gridSize;
 
-    public Grid(int gridSize) {
+    public Grid(int gridSize) { // initalize grid
         this.gridSize = gridSize;
         board = new Sprite[gridSize][gridSize];
 
@@ -30,7 +30,7 @@ public class Grid {
         return board[row][col];
     }
 
-    // places a sprite directly onto the board at its (x, y) coords
+    // places a sprite onto the board at its (x, y) coords
     public void placeSprite(Sprite sprite) {
         board[gridSize - 1 - sprite.getY()][sprite.getX()] = sprite;
     }
@@ -38,9 +38,9 @@ public class Grid {
     // places a sprite and replaces the old spot with a Dot
     public void placeSprite(Sprite sprite, String direction) {
         Dot oldPosition = new Dot(0, 0);
-        placeSprite(sprite); // place at new position
+        placeSprite(sprite);
 
-        // figure out where the sprite came *from* and put a Dot there
+        // figure out where the sprite came from and put a Dot there
         int oldX = sprite.getX();
         int oldY = sprite.getY();
 
@@ -54,7 +54,7 @@ public class Grid {
         placeSprite(oldPosition);
     }
 
-    // prints the current board state to the terminal
+    // prints the current board
     public void display() {
         for (int row = 0; row < gridSize; row++) {
             for (int col = 0; col < gridSize; col++) {
@@ -75,37 +75,38 @@ public class Grid {
         }
     }
 
-    // show board full of scorpions when player loses
+    // when player loses, show board of scorpions
     public void gameover() {
-        StringBuilder output = new StringBuilder();
         for (int row = 0; row < gridSize; row++) {
             for (int col = 0; col < gridSize; col++) {
                 Sprite current = board[row][col];
-                if (current instanceof Dot) {
-                    output.append("🦂");
-                } else if (current instanceof Player) {
-                    output.append("🦄");
+    
+                if (current instanceof Player) {
+                    System.out.print("🦄 ");
+                } else {
+                    System.out.print("🦂 ");
                 }
             }
-            output.append("\n");
+            System.out.println();
         }
-        System.out.println(output);
     }
+    
+    
 
-    // show board full of rainbows when player wins
+    // when player wins, show board of rainbows
     public void win() {
-        StringBuilder output = new StringBuilder();
         for (int row = 0; row < gridSize; row++) {
             for (int col = 0; col < gridSize; col++) {
                 Sprite current = board[row][col];
-                if (current instanceof Dot) {
-                    output.append("🌈");
-                } else if (current instanceof Player) {
-                    output.append("🦄");
+    
+                if (current instanceof Player) {
+                    System.out.print("🦄 ");
+                } else {
+                    System.out.print("🌈 ");
                 }
             }
-            output.append("\n");
+            System.out.println();
         }
-        System.out.println(output);
     }
 }
+    
